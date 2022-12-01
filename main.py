@@ -34,6 +34,15 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             exit()
+        if event.type == KEYDOWN:
+            if event.key == K_a:
+                x_snake = x_snake - 15
+            if event.key == K_d:
+                x_snake = x_snake + 15
+            if event.key == K_w:
+                y_snake = y_snake - 15
+            if event.key == K_s:
+                y_snake = y_snake + 15
     # criando a maçã e a cobra
     maca = pygame.draw.rect(tela, (255, 0, 0), (x_maca, y_maca, 25, 25))
     snake = pygame.draw.rect(tela, (0, 255, 0), (x_snake, y_snake, 25, 25))
