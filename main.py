@@ -2,6 +2,7 @@
 import pygame
 from pygame.locals import *
 from sys import exit  # função para fechar a janela
+from random import randint
 
 # iniciando o pygame
 
@@ -34,6 +35,7 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             exit()
+        # movimentação
         if event.type == KEYDOWN:
             if event.key == K_a:
                 x_snake = x_snake - 15
@@ -46,5 +48,8 @@ while True:
     # criando a maçã e a cobra
     maca = pygame.draw.rect(tela, (255, 0, 0), (x_maca, y_maca, 25, 25))
     snake = pygame.draw.rect(tela, (0, 255, 0), (x_snake, y_snake, 25, 25))
+    if snake.colliderect(maca):
+        x_maca = randint(10, 580)
+        y_maca = randint(10, 580)
     # atualiza a tela do jogo a cada interação do loop principal
     pygame.display.update()
