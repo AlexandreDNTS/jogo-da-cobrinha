@@ -22,7 +22,8 @@ x_maca = 580
 y_snake = altura//2
 x_snake = largura//2
 
-x_controle = 20
+velocidade = 10
+x_controle = velocidade
 y_controle = 0
 # criando a tela
 
@@ -65,17 +66,29 @@ while True:
     # movimentação
     if event.type == KEYDOWN:
         if event.key == K_a:
-            x_controle = -20
-            y_controle = 0
+            if x_controle == velocidade:
+                pass
+            else:
+                x_controle = -velocidade
+                y_controle = 0
         if event.key == K_d:
-            x_controle = 20
-            y_controle = 0
+            if x_controle == -velocidade:
+                pass
+            else:
+                x_controle = velocidade
+                y_controle = 0
         if event.key == K_w:
-            y_controle = -20
-            x_controle = 0
+            if y_controle == velocidade:
+                pass
+            else:
+                y_controle = -velocidade
+                x_controle = 0
         if event.key == K_s:
-            y_controle = 20
-            x_controle = 0
+            if y_controle == -velocidade:
+                pass
+            else:
+                y_controle = velocidade
+                x_controle = 0
     x_snake = x_snake + x_controle
     y_snake = y_snake + y_controle
     # criando a maçã e a cobra
