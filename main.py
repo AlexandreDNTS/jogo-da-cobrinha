@@ -30,7 +30,20 @@ pygame.display.set_caption('SNAKE GAME')
 relogio = pygame.time.Clock()
 # pontuação
 pontos = 0
+# funções
+
+lista_cobra = []
+comprimento_inicial = 2
+
+
+def aumenta_cobra(lista_cobra):
+    for XeY in lista_cobra:
+        # XeY = [x,y]
+        # XeY[0] = x
+        # XeY[1] = y
+        pygame.draw.rect(tela, (0, 255, 0), (XeY[0], XeY[1], 20, 20))
 # loop infinito para roda o jogo
+
 
 while True:
     # frames
@@ -56,13 +69,23 @@ while True:
     if pygame.key.get_pressed()[K_s]:
         y_snake = y_snake+15
     # criando a maçã e a cobra
-    maca = pygame.draw.rect(tela, (255, 0, 0), (x_maca, y_maca, 25, 25))
-    snake = pygame.draw.rect(tela, (0, 255, 0), (x_snake, y_snake, 25, 25))
+    maca = pygame.draw.rect(tela, (255, 0, 0), (x_maca, y_maca, 20, 20))
+    snake = pygame.draw.rect(tela, (0, 255, 0), (x_snake, y_snake, 20, 20))
     # condições de colisões
     if snake.colliderect(maca):
-        pontos = pontos+1
+        pontos += 1
         x_maca = randint(10, 580)
         y_maca = randint(10, 580)
+        comprimento_inicial += 1
+    # crescimento da cobra
+
+    lista_cabeca = []
+    lista_cabeca.append(x_snake)
+    lista_cabeca.append(y_snake)
+    lista_cobra.append(lista_cabeca)
+    if len(lista_cobra) > comprimento_inicial:
+        del lista_cobra[0]
+    aumenta_cobra(lista_cobra)
     # atualiza a tela do jogo a cada interação do loop principal
     tela.blit(textoFormatado, (450, 40))
     pygame.display.update()
