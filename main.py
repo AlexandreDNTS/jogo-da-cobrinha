@@ -21,6 +21,9 @@ x_maca = 580
 
 y_snake = altura//2
 x_snake = largura//2
+
+x_controle = 20
+y_controle = 0
 # criando a tela
 
 tela = pygame.display.set_mode((largura, altura))
@@ -60,14 +63,21 @@ while True:
             pygame.quit()
             exit()
     # movimentação
-    if pygame.key.get_pressed()[K_a]:
-        x_snake = x_snake-15
-    if pygame.key.get_pressed()[K_d]:
-        x_snake = x_snake+15
-    if pygame.key.get_pressed()[K_w]:
-        y_snake = y_snake-15
-    if pygame.key.get_pressed()[K_s]:
-        y_snake = y_snake+15
+    if event.type == KEYDOWN:
+        if event.key == K_a:
+            x_controle = -20
+            y_controle = 0
+        if event.key == K_d:
+            x_controle = 20
+            y_controle = 0
+        if event.key == K_w:
+            y_controle = -20
+            x_controle = 0
+        if event.key == K_s:
+            y_controle = 20
+            x_controle = 0
+    x_snake = x_snake + x_controle
+    y_snake = y_snake + y_controle
     # criando a maçã e a cobra
     maca = pygame.draw.rect(tela, (255, 0, 0), (x_maca, y_maca, 20, 20))
     snake = pygame.draw.rect(tela, (0, 255, 0), (x_snake, y_snake, 20, 20))
